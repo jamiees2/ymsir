@@ -46,7 +46,10 @@ void service_setup(int lfd, int connfd, int ruid)
 	service();
 }
 
-
+void neverrun(void)
+{
+	printf("H4x0r!!!!!!!!!!!!!11");
+}
 void service(void)
 {
 	static char *answer;
@@ -62,27 +65,28 @@ void service(void)
 
 	printf ("OK\tWelcome to the RU Hacking Contest QUIZ server. You seem to be far along...\n");
 	printf ("OK\tPlease enter the access word.\n");
+	
+	memset (buf, 0, sizeof(buf));
+	// while (tries--)
+	// {
+	// 	memset (buf, 0, sizeof(buf));
+	// 	//i = Rio_readn (0, buf, sizeof(buf));
+	// 	fgets (buf, sizeof(buf), stdin);
 
-	while (tries--)
-	{
-		memset (buf, 0, sizeof(buf));
-		//i = Rio_readn (0, buf, sizeof(buf));
-		fgets (buf, sizeof(buf), stdin);
+	// 	/* Remove carriage return and newline */
+	// 	if (strchr (buf, '\n'))
+	// 		*(strchr (buf, '\n')) = 0;
+	// 	if (strchr (buf, '\r'))
+	// 		*(strchr (buf, '\r')) = 0;
 
-		/* Remove carriage return and newline */
-		if (strchr (buf, '\n'))
-			*(strchr (buf, '\n')) = 0;
-		if (strchr (buf, '\r'))
-			*(strchr (buf, '\r')) = 0;
-
-		if (!strncasecmp (buf, "MELODY", 6))
-		{
-			printf ("OK\tCorrect. Now answer the following questions.\n");
-			break;
-		}
-		if (tries > 0)
-			printf ("ERR\tNo... try again.\n");
-	}
+	// 	if (!strncasecmp (buf, "MELODY", 6))
+	// 	{
+	// 		printf ("OK\tCorrect. Now answer the following questions.\n");
+	// 		break;
+	// 	}
+	// 	if (tries > 0)
+	// 		printf ("ERR\tNo... try again.\n");
+	// }
 		
 	if (tries < 0)
 	{
