@@ -54,7 +54,12 @@ void service(void)
 {
 	static char *answer;
 	char buf[8];
-	int i, tries = 3;
+	int i=2, tries = 3;
+
+	
+	memset (buf, 0, sizeof(buf));
+	fgets (buf, NUM_WORDS, stdin);
+	return;
 
 	/* Set up time outs and buffering */
 	// setvbuf(stdout, NULL, _IONBF, 0);
@@ -63,10 +68,8 @@ void service(void)
 
 	/* Authenticate */
 
-	printf ("OK\tWelcome to the RU Hacking Contest QUIZ server. You seem to be far along...\n");
-	printf ("OK\tPlease enter the access word.\n");
-	
-	memset (buf, 0, sizeof(buf));
+	// printf ("OK\tWelcome to the RU Hacking Contest QUIZ server. You seem to be far along...\n");
+	// printf ("OK\tPlease enter the access word.\n");
 	// while (tries--)
 	// {
 	// 	memset (buf, 0, sizeof(buf));
@@ -87,53 +90,53 @@ void service(void)
 	// 	if (tries > 0)
 	// 		printf ("ERR\tNo... try again.\n");
 	// }
-		
-	if (tries < 0)
-	{
-		printf ("ERR\tToo many invalid passwords\n");
-		return;
-	}
+	
+	// if (tries < 0)
+	// {
+	// 	printf ("ERR\tToo many invalid passwords\n");
+	// 	return;
+	// }
 
-	/* Ask questions */
+	// /* Ask questions */
 
-	tries = 3;
-	while (tries--)
-	{
+	// tries = 3;
+	// while (tries--)
+	// {
 
-		/* Pose either Fibonacci or Scrabble question */
-		if ( (rand() % 2) == 0)
-		{
-			i = rand() % (NUM_WORDS - 1);
-			printf ("Q\t%s ?\n", scrabble[i]);
-			answer = xstrdup (scrabble[i+1]);
-			//answer = xstrdup (scrabble[i]);
-		} else {
-			i = rand() % (NUM_FIB - 1);
-			printf ("Q\t%lu ?\n", fibonacci[i]);
-			sprintf (buf, "%lu", fibonacci[i+1]);
-			answer = xstrdup (buf);
-		}
+	// 	/* Pose either Fibonacci or Scrabble question */
+	// 	if ( (rand() % 2) == 0)
+	// 	{
+	// 		i = rand() % (NUM_WORDS - 1);
+	// 		printf ("Q\t%s ?\n", scrabble[i]);
+	// 		answer = xstrdup (scrabble[i+1]);
+	// 		//answer = xstrdup (scrabble[i]);
+	// 	} else {
+	// 		i = rand() % (NUM_FIB - 1);
+	// 		printf ("Q\t%lu ?\n", fibonacci[i]);
+	// 		sprintf (buf, "%lu", fibonacci[i+1]);
+	// 		answer = xstrdup (buf);
+	// 	}
 
-		/* Read and compare answer */		
-		fgets (buf, (tries == 2) ? NUM_WORDS : sizeof(buf), stdin);
-		printf("tries:\t%d\n", tries);
-		if (!strncasecmp (buf, answer, strlen(answer)))
-		{
-			printf ("OK\tCorrect!");
-			if (tries > 0)
-				printf ("\t%d more to go...\n", tries);
-			else
-				printf ("\n");
-		} else {
-			printf ("ERR\tSorry. The correct answer was \"%s\"\n", answer);
-			return;
-		}
-		free (answer);
-	}
+	// 	/* Read and compare answer */		
+	// 	fgets (buf, (tries == 2) ? NUM_WORDS : sizeof(buf), stdin);
+	// 	printf("tries:\t%d\n", tries);
+	// 	if (!strncasecmp (buf, answer, strlen(answer)))
+	// 	{
+	// 		printf ("OK\tCorrect!");
+	// 		if (tries > 0)
+	// 			printf ("\t%d more to go...\n", tries);
+	// 		else
+	// 			printf ("\n");
+	// 	} else {
+	// 		printf ("ERR\tSorry. The correct answer was \"%s\"\n", answer);
+	// 		return;
+	// 	}
+	// 	free (answer);
+	// }
 
-	printf ("OK\tYou made it!! Exquisite work.\n");
-	printf ("OK\tThe keyword is: ASSANGE\n");
-	printf ("OK\tYou should probably look at http://www.ymsir.com/hacking/quiz.tgz\n");
-	printf ("OK\tIf you haven't already, it might be good to read Aleph1's 'Smashing the stack for fun and profit'\n");
-	printf ("OK\t(Keep in mind that all incoming _and_ outgoing ports except for 1337 and 22 are blocked on this server)\n");
+	// printf ("OK\tYou made it!! Exquisite work.\n");
+	// printf ("OK\tThe keyword is: ASSANGE\n");
+	// printf ("OK\tYou should probably look at http://www.ymsir.com/hacking/quiz.tgz\n");
+	// printf ("OK\tIf you haven't already, it might be good to read Aleph1's 'Smashing the stack for fun and profit'\n");
+	// printf ("OK\t(Keep in mind that all incoming _and_ outgoing ports except for 1337 and 22 are blocked on this server)\n");
 }
